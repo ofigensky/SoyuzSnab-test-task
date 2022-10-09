@@ -16,6 +16,9 @@
 		FA357F9928EF156600E6CB65 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9828EF156600E6CB65 /* MainTabBarViewController.swift */; };
 		FA357F9B28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9A28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift */; };
 		FA357F9E28EF3F1200E6CB65 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9D28EF3F1200E6CB65 /* CollectionViewCell.swift */; };
+		FA9D836828EF523300CCC1F0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D836728EF523300CCC1F0 /* Data.swift */; };
+		FA9D836B28EF524900CCC1F0 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D836A28EF524900CCC1F0 /* APICaller.swift */; };
+		FA9D836E28EF5A4A00CCC1F0 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D836D28EF5A4A00CCC1F0 /* WeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		FA357F9828EF156600E6CB65 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		FA357F9A28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
 		FA357F9D28EF3F1200E6CB65 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		FA9D836728EF523300CCC1F0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		FA9D836A28EF524900CCC1F0 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		FA9D836D28EF5A4A00CCC1F0 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +68,15 @@
 		FA357F8028EF12B800E6CB65 /* SoyuzSnab-test-task */ = {
 			isa = PBXGroup;
 			children = (
+				FA357F8F28EF12B900E6CB65 /* Info.plist */,
+				FA357F8C28EF12B900E6CB65 /* LaunchScreen.storyboard */,
+				FA357F8A28EF12B900E6CB65 /* Assets.xcassets */,
 				FA357F8128EF12B800E6CB65 /* AppDelegate.swift */,
 				FA357F8328EF12B800E6CB65 /* SceneDelegate.swift */,
+				FA9D836C28EF524F00CCC1F0 /* Manager */,
+				FA9D836928EF523700CCC1F0 /* Model */,
 				FA357F9C28EF2FB800E6CB65 /* Views */,
 				FA357F9728EF14DD00E6CB65 /* Controllers */,
-				FA357F8A28EF12B900E6CB65 /* Assets.xcassets */,
-				FA357F8C28EF12B900E6CB65 /* LaunchScreen.storyboard */,
-				FA357F8F28EF12B900E6CB65 /* Info.plist */,
 			);
 			path = "SoyuzSnab-test-task";
 			sourceTree = "<group>";
@@ -90,6 +98,23 @@
 				FA357F9D28EF3F1200E6CB65 /* CollectionViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FA9D836928EF523700CCC1F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA9D836728EF523300CCC1F0 /* Data.swift */,
+				FA9D836D28EF5A4A00CCC1F0 /* WeatherModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA9D836C28EF524F00CCC1F0 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				FA9D836A28EF524900CCC1F0 /* APICaller.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,11 +187,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9D836B28EF524900CCC1F0 /* APICaller.swift in Sources */,
 				FA357F8628EF12B800E6CB65 /* HomeViewController.swift in Sources */,
 				FA357F8228EF12B800E6CB65 /* AppDelegate.swift in Sources */,
 				FA357F9928EF156600E6CB65 /* MainTabBarViewController.swift in Sources */,
+				FA9D836E28EF5A4A00CCC1F0 /* WeatherModel.swift in Sources */,
 				FA357F9E28EF3F1200E6CB65 /* CollectionViewCell.swift in Sources */,
 				FA357F9B28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift in Sources */,
+				FA9D836828EF523300CCC1F0 /* Data.swift in Sources */,
 				FA357F9628EF14D600E6CB65 /* FavoriteViewController.swift in Sources */,
 				FA357F8428EF12B800E6CB65 /* SceneDelegate.swift in Sources */,
 			);
