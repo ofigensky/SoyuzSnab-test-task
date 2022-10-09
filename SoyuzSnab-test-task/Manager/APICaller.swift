@@ -10,16 +10,6 @@
 
 import Foundation
 
-struct WeatherDataModel: Identifiable, Decodable {
-    public let id: Int
-    public let main, description, icon: String
-    public let count = 20
-}
-
-struct MainWeatherDataModel: Identifiable, Decodable {
-    let id: Int
-    let weather: [WeatherDataModel]?
-}
 
 struct Constants {
     static let API_KEY = "b29f575d40bb6530ee374c0132ed18f0"

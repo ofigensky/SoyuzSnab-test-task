@@ -23,24 +23,7 @@ class HomeViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-//        fetchWithFor()
     }
-    
-//    func fetchWithFor() {
-//        for city in cities {
-//            fetchWeather(city)
-//        }
-//    }
-//
-//    func fetchWeather(_ name: String) {
-//        APICaller.shared.getData(cityName: name) { result in
-//            switch result {
-//            case .success(let arr): self.citiesWeather[name] = arr
-//                print("HOME VC \(name)fetchWeather \(arr)")
-//            case .failure(let error): print(error)
-//            }
-//        }
-//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

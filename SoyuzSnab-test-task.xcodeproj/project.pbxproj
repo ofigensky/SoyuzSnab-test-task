@@ -18,7 +18,6 @@
 		FA357F9E28EF3F1200E6CB65 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9D28EF3F1200E6CB65 /* CollectionViewCell.swift */; };
 		FA9D836828EF523300CCC1F0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D836728EF523300CCC1F0 /* Data.swift */; };
 		FA9D836B28EF524900CCC1F0 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D836A28EF524900CCC1F0 /* APICaller.swift */; };
-		FA9D836E28EF5A4A00CCC1F0 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D836D28EF5A4A00CCC1F0 /* WeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +34,6 @@
 		FA357F9D28EF3F1200E6CB65 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		FA9D836728EF523300CCC1F0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		FA9D836A28EF524900CCC1F0 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
-		FA9D836D28EF5A4A00CCC1F0 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				FA9D836728EF523300CCC1F0 /* Data.swift */,
-				FA9D836D28EF5A4A00CCC1F0 /* WeatherModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,7 +188,6 @@
 				FA357F8628EF12B800E6CB65 /* HomeViewController.swift in Sources */,
 				FA357F8228EF12B800E6CB65 /* AppDelegate.swift in Sources */,
 				FA357F9928EF156600E6CB65 /* MainTabBarViewController.swift in Sources */,
-				FA9D836E28EF5A4A00CCC1F0 /* WeatherModel.swift in Sources */,
 				FA357F9E28EF3F1200E6CB65 /* CollectionViewCell.swift in Sources */,
 				FA357F9B28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift in Sources */,
 				FA9D836828EF523300CCC1F0 /* Data.swift in Sources */,

@@ -17,7 +17,6 @@ class CollectionViewTableViewCell: UITableViewCell {
     static let identifier = "CollectionViewTableViewCell"
     var weather: [WeatherDataModel] = [WeatherDataModel]()
     
-    var citiesWeather: [String : [WeatherDataModel]] = [String : [WeatherDataModel]]()
     var cities = ["Moscow", "Vladivostok", "Novosibirsk", "Yekaterinburg", "Kazan", "Irkutsk", "Chelyabinsk", "Krasnoyarsk", "Samara", "Ufa", "Rostov-on-Don", "Omsk", "Krasnodar", "Voronezh", "Perm", "Volgograd", "Saratov", "Tyumen", "Tolyatti", "Barnaul"]
     
     weak var delegate: CollectionViewTableViewCellDelegate?
