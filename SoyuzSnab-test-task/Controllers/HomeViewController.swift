@@ -1,13 +1,9 @@
 
 import UIKit
 
-enum Sections: Int {
-    case NewWeather = 0
-}
-
 final class HomeViewController: UIViewController {
     
-    var citiesWeather: [String : [WeatherDataModel]] = [String : [WeatherDataModel]]() {
+    private var citiesWeather: [String : [WeatherDataModel]] = [String : [WeatherDataModel]]()  {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -29,8 +25,8 @@ final class HomeViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        
-        for city in cities {
+
+        for city in cities { // refactor to func
             APICaller.shared.getData(cityName: city) { result in
                 switch result {
                 case .success(let data):
@@ -40,6 +36,11 @@ final class HomeViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,14 +59,16 @@ extension HomeViewController: UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as! CollectionViewTableViewCell
         
         let firstCity = cities[indexPath.row]
-        let secondCity = cities[indexPath.row]
+        let secondCity = cities[indexPath.row + 10]
+        let firstCityWeather = citiesWeather[firstCity]
+        let test = firstCityWeather?[0].description
         cell.delegate = self
-        cell.configure(.init(firstCityName: firstCity, secondCityName: secondCity))
+        cell.configure(.init(firstCityName: firstCity, secondCityName: secondCity, test: test ?? ""))
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 200
     }
 }
 

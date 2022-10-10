@@ -1,9 +1,3 @@
-//
-//  DataModel.swift
-//  SoyuzSnab-test-task
-//
-//  Created by Gleb Glushok on 06.10.2022.
-//
 
 import Foundation
 

@@ -42,9 +42,12 @@ extension FavouriteViewContoller: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteCell.identifier) as! FavouriteCell
         let name = FavouriteService.shared.favouriteCities[indexPath.row]
         let value = favouriteWeather[name]
-        
         cell.configure(.init(text: name))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
 }
 

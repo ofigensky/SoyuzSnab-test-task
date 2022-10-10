@@ -1,9 +1,3 @@
-//
-//  CollectionViewCell.swift
-//  SoyuzSnab-test-task
-//
-//  Created by Gleb Glushok on 06.10.2022.
-//
 
 import Foundation
 import UIKit
@@ -14,9 +8,9 @@ class FavouriteCell: UITableViewCell {
     
     private let label: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
     
