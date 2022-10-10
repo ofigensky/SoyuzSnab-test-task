@@ -19,5 +19,5 @@ struct Main: Decodable {
 }
 
 struct Wind: Decodable {
-    let wind: Double?
+    let speed: Double?
 }
