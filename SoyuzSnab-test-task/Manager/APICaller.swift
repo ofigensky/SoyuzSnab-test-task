@@ -18,6 +18,7 @@ class APICaller {
                 let results = try JSONDecoder().decode(MainWeatherDataModel.self, from: data)
                 if let weather = results.weather {
                     completion(.success(weather))
+                    print(weather.description)
                 } else {
                     completion(.success([]))
                 }

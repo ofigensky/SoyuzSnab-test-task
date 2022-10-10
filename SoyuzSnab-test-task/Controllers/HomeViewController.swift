@@ -62,6 +62,7 @@ extension HomeViewController: UITableViewDelegate {
         let secondCity = cities[indexPath.row + 10]
         let firstCityWeather = citiesWeather[firstCity]
         let test = firstCityWeather?[0].description
+
         cell.delegate = self
         cell.configure(.init(firstCityName: firstCity, secondCityName: secondCity, test: test ?? ""))
         return cell

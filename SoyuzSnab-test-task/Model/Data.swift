@@ -10,4 +10,14 @@ struct WeatherDataModel: Identifiable, Decodable {
 struct MainWeatherDataModel: Identifiable, Decodable {
     let id: Int
     let weather: [WeatherDataModel]?
+    let main: Main
+    let wind: Wind
+}
+
+struct Main: Decodable {
+    let temp: Double?
+}
+
+struct Wind: Decodable {
+    let wind: Double?
 }
