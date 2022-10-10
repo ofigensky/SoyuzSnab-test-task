@@ -12,12 +12,13 @@
 		FA357F8628EF12B800E6CB65 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F8528EF12B800E6CB65 /* HomeViewController.swift */; };
 		FA357F8B28EF12B900E6CB65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA357F8A28EF12B900E6CB65 /* Assets.xcassets */; };
 		FA357F8E28EF12B900E6CB65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA357F8C28EF12B900E6CB65 /* LaunchScreen.storyboard */; };
-		FA357F9628EF14D600E6CB65 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9528EF14D600E6CB65 /* FavoriteViewController.swift */; };
+		FA357F9628EF14D600E6CB65 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9528EF14D600E6CB65 /* FavouriteViewController.swift */; };
 		FA357F9928EF156600E6CB65 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9828EF156600E6CB65 /* MainTabBarViewController.swift */; };
 		FA357F9B28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9A28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift */; };
-		FA357F9E28EF3F1200E6CB65 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9D28EF3F1200E6CB65 /* CollectionViewCell.swift */; };
+		FA357F9E28EF3F1200E6CB65 /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA357F9D28EF3F1200E6CB65 /* FavouriteCell.swift */; };
 		FA9D836828EF523300CCC1F0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D836728EF523300CCC1F0 /* Data.swift */; };
 		FA9D836B28EF524900CCC1F0 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D836A28EF524900CCC1F0 /* APICaller.swift */; };
+		FABDDE8828F3F398006E306D /* FavouriteSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDDE8728F3F398006E306D /* FavouriteSingleton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,12 +29,13 @@
 		FA357F8A28EF12B900E6CB65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA357F8D28EF12B900E6CB65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA357F8F28EF12B900E6CB65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA357F9528EF14D600E6CB65 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		FA357F9528EF14D600E6CB65 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		FA357F9828EF156600E6CB65 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		FA357F9A28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
-		FA357F9D28EF3F1200E6CB65 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		FA357F9D28EF3F1200E6CB65 /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
 		FA9D836728EF523300CCC1F0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		FA9D836A28EF524900CCC1F0 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		FABDDE8728F3F398006E306D /* FavouriteSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteSingleton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				FA357F8528EF12B800E6CB65 /* HomeViewController.swift */,
-				FA357F9528EF14D600E6CB65 /* FavoriteViewController.swift */,
+				FA357F9528EF14D600E6CB65 /* FavouriteViewController.swift */,
 				FA357F9828EF156600E6CB65 /* MainTabBarViewController.swift */,
 			);
 			path = Controllers;
@@ -93,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				FA357F9A28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift */,
-				FA357F9D28EF3F1200E6CB65 /* CollectionViewCell.swift */,
+				FA357F9D28EF3F1200E6CB65 /* FavouriteCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				FA9D836A28EF524900CCC1F0 /* APICaller.swift */,
+				FABDDE8728F3F398006E306D /* FavouriteSingleton.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -186,12 +189,13 @@
 			files = (
 				FA9D836B28EF524900CCC1F0 /* APICaller.swift in Sources */,
 				FA357F8628EF12B800E6CB65 /* HomeViewController.swift in Sources */,
+				FABDDE8828F3F398006E306D /* FavouriteSingleton.swift in Sources */,
 				FA357F8228EF12B800E6CB65 /* AppDelegate.swift in Sources */,
 				FA357F9928EF156600E6CB65 /* MainTabBarViewController.swift in Sources */,
-				FA357F9E28EF3F1200E6CB65 /* CollectionViewCell.swift in Sources */,
+				FA357F9E28EF3F1200E6CB65 /* FavouriteCell.swift in Sources */,
 				FA357F9B28EF2FB400E6CB65 /* CollectionViewTableViewCell.swift in Sources */,
 				FA9D836828EF523300CCC1F0 /* Data.swift in Sources */,
-				FA357F9628EF14D600E6CB65 /* FavoriteViewController.swift in Sources */,
+				FA357F9628EF14D600E6CB65 /* FavouriteViewController.swift in Sources */,
 				FA357F8428EF12B800E6CB65 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

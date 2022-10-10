@@ -5,13 +5,19 @@ enum Sections: Int {
     case NewWeather = 0
 }
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
-    var citiesWeather: [String : [WeatherDataModel]] = [String : [WeatherDataModel]]()
+    var citiesWeather: [String : [WeatherDataModel]] = [String : [WeatherDataModel]]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     var cities = ["Moscow", "Vladivostok", "Novosibirsk", "Yekaterinburg", "Kazan", "Irkutsk", "Chelyabinsk", "Krasnoyarsk", "Samara", "Ufa", "Rostov-on-Don", "Omsk", "Krasnodar", "Voronezh", "Perm", "Volgograd", "Saratov", "Tyumen", "Tolyatti", "Barnaul"]
 
-    
-    
+
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
@@ -23,6 +29,17 @@ class HomeViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        for city in cities {
+            APICaller.shared.getData(cityName: city) { result in
+                switch result {
+                case .success(let data):
+                    self.citiesWeather[city] = data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -31,43 +48,19 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
-    }
+extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return citiesWeather.count / 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
-        cell.delegate = self
+        let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as! CollectionViewTableViewCell
         
-        switch indexPath.section {
-        case Sections.NewWeather.rawValue:
-            
-            for city in cities {
-              fetchWeather(city)
-            }
-            
-            func fetchWeather(_ name: String) {
-                APICaller.shared.getData(cityName: name) { result in
-                    switch result {
-                    case .success(let arr):
-                        cell.configure(with: arr)
-//                        print("HOME VC \(name) fetchWeather \(arr[indexPath.row].description)")
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            }
-            
-            
-        default:
-            return UITableViewCell()
-        }
+        let firstCity = cities[indexPath.row]
+        let secondCity = cities[indexPath.row]
+        cell.delegate = self
+        cell.configure(.init(firstCityName: firstCity, secondCityName: secondCity))
         return cell
     }
     
@@ -76,6 +69,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
 extension HomeViewController: CollectionViewTableViewCellDelegate {
     
+    func firstCityButtonTapped(completion: @escaping () -> String) {
+        let name = completion()
+        if let value = citiesWeather[name] {
+            FavouriteService.shared.addToFavourite(name: name, weatherParam: value)
+        }
+    }
+    
+    func secondCityButtonTapped(completion: @escaping () -> String) {
+        let name = completion()
+        if let value = citiesWeather[name] {
+            FavouriteService.shared.addToFavourite(name: name, weatherParam: value)
+        }
+    }
 }

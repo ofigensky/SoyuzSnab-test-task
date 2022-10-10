@@ -1,15 +1,5 @@
-//
-//  NetworkManager.swift
-//  SoyuzSnab-test-task
-//
-//  Created by Gleb Glushok on 06.10.2022.
-//https://api.openweathermap.org/data/2.5/weather?appid=INSERT YOUR KEY HERE&units=metric
-////
-// chrom https://api.openweathermap.org/data/2.5/weather?appid=b29f575d40bb6530ee374c0132ed18f0&units=metric&q=Moscow
-//
 
 import Foundation
-
 
 struct Constants {
     static let API_KEY = "b29f575d40bb6530ee374c0132ed18f0"

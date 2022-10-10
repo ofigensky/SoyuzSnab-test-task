@@ -16,7 +16,7 @@ class MainTabBarViewController: UITabBarController {
         view.backgroundColor = .systemBackground
         
         let vc1 = UINavigationController(rootViewController: HomeViewController())
-        let vc2 = UINavigationController(rootViewController: FavoriteViewContoller())
+        let vc2 = UINavigationController(rootViewController: FavouriteViewContoller())
         
         vc1.tabBarItem.image = UIImage(systemName: "sun.and.horizon")
         vc2.tabBarItem.image = UIImage(systemName: "heart")
