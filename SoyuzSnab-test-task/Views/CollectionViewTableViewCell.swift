@@ -5,91 +5,96 @@ import UIKit
 final class CollectionViewTableViewCell: UITableViewCell {
     
     static let identifier = "CollectionViewTableViewCell"
-    
     var delegate: CollectionViewTableViewCellDelegate?
     
     private let firstCityLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let secondCityLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let firstCityButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Save button", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .systemGray6
+        button.layer.cornerRadius = 7
+        button.setTitle("Save city", for: .normal)
+        button.setTitleColor(UIColor.label, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private let secondCityButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Save button", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .systemGray6
+        button.layer.cornerRadius = 7
+        button.setTitle("Save city", for: .normal)
+        button.setTitleColor(UIColor.label, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private let firstCityImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "sun.max")
+    var firstCityImage: UIImageView = {
+        var imageView = UIImageView()
+        imageView.tintColor = .orange
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let secondCityImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "sun.max")
+    var secondCityImage: UIImageView = {
+        var imageView = UIImageView()
+        imageView.tintColor = .orange
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let firstCityWeatherLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let secondCityWeatherLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let firstCityTemp: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let secondCityTemp: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let firstCityWind: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let secondCityWind: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -157,9 +162,9 @@ final class CollectionViewTableViewCell: UITableViewCell {
             secondCityWind.topAnchor.constraint(equalTo: secondCityTemp.bottomAnchor, constant: 10),
             secondCityWind.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
-            firstCityButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5),
+            firstCityButton.bottomAnchor.constraint(equalTo: bottomAnchor),
             firstCityButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            secondCityButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5),
+            secondCityButton.bottomAnchor.constraint(equalTo: bottomAnchor),
             secondCityButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
     
         ])
@@ -176,7 +181,47 @@ extension CollectionViewTableViewCell {
         let secondCityTemp: Double
         let firstCityWind: Double
         let secondCityWind: Double
-
+        let firstCityConditionId: Int
+        let secondCityConditionId: Int
+        
+        var firstCityCondition: String { // parsed ID converted to SF Symbols name and put in firstCityImage
+            switch firstCityConditionId {
+            case 200...531:
+                return "cloud.rain"
+            case 600...622:
+                return "cloud.snow"
+            case 800:
+                return "sun.max"
+            case 801:
+                return "sun.min"
+            case 802...803:
+                return "cloud.sun"
+            case 804:
+                return "smoke"
+            default:
+                return "cloud"
+            }
+        }
+        
+        var secondCityCondition: String {
+            switch secondCityConditionId {
+            case 200...531:
+                return "cloud.rain"
+            case 600...622:
+                return "cloud.snow"
+            case 800:
+                return "sun.max"
+            case 801:
+                return "sun.min"
+            case 802...803:
+                return "cloud.sun"
+            case 804:
+                return "smoke"
+            default:
+                return "cloud"
+            }
+        }
+        var config = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold) // size of SF Symbol
     }
     
     func configure(_ viewState: ViewState) {
@@ -188,6 +233,8 @@ extension CollectionViewTableViewCell {
         secondCityTemp.text = viewState.secondCityTemp.toString() + " °C"
         firstCityWind.text = viewState.firstCityWind.toString() + " m/s"
         secondCityWind.text = viewState.secondCityWind.toString() + " m/s"
+        firstCityImage.image = UIImage(systemName: viewState.firstCityCondition, withConfiguration: viewState.config)
+        secondCityImage.image = UIImage(systemName: viewState.secondCityCondition, withConfiguration: viewState.config)
     }
 }
 

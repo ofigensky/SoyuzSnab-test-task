@@ -6,9 +6,17 @@ final class FavouriteCell: UITableViewCell {
     
     static let identifier = "CollectionViewCell"
     
-    private let label: UILabel = {
+    private let cityNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let weatherLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         return label
@@ -24,23 +32,28 @@ final class FavouriteCell: UITableViewCell {
     }
     
     private func setupSubviews() {
-        contentView.addSubview(label)
+        contentView.addSubview(cityNameLabel)
+        contentView.addSubview(weatherLabel)
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            cityNameLabel.topAnchor.constraint(equalTo: topAnchor),
+            cityNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            
+            weatherLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 10),
+            weatherLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+            
         ])
     }
 }
 
 extension FavouriteCell {
     struct ViewState {
+        let name: String
         let text: String
     }
     
     func configure(_ viewState: ViewState) {
-        label.text = viewState.text
+        cityNameLabel.text = viewState.name
+        weatherLabel.text = viewState.text
     }
 }

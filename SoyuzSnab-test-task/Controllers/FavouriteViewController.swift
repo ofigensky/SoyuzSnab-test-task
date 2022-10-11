@@ -11,20 +11,9 @@ final class FavouriteViewContoller: UIViewController {
             }
         }
     }
-    private var favouriteTemp: [String : Main] = [:] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    private var favouriteWind: [String : Wind] = [:] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    private var favouriteTemp: [String : Main] = [:]
+    
+    private var favouriteWind: [String : Wind] = [:]
     
     private let tableView = UITableView()
     
@@ -61,8 +50,8 @@ extension FavouriteViewContoller: UITableViewDataSource {
         let weather = FavouriteService.shared.favouriteWeather[name]?[0].description
         let temp = FavouriteService.shared.favouriteTemp[name]?.temp?.toString()
         let wind = FavouriteService.shared.favouriteWind[name]?.speed?.toString()
-        let text = "\(name)\n \(weather!) \n \(temp!) °C\n \(wind!) m/s"
-        cell.configure(.init(text: text))
+        let text = "\(weather!)\n\(temp!) °C\n\(wind!) m/s"
+        cell.configure(.init(name: name, text: text))
         return cell
     }
     
@@ -70,10 +59,12 @@ extension FavouriteViewContoller: UITableViewDataSource {
         return 150
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) { // method for deleting row 
+        
         if editingStyle == .delete {
-            favouriteWeather.removeAll()
+            let name = FavouriteService.shared.favouriteCities[indexPath.row]
+            favouriteWeather.removeValue(forKey: name)
+            FavouriteService.shared.removeFromFavourite(name: name)
             tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }

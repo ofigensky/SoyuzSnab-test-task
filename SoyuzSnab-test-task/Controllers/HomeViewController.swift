@@ -15,7 +15,7 @@ final class HomeViewController: UIViewController {
         return tableView
     }()
     
-    private let group = DispatchGroup()
+    private let group = DispatchGroup() // used for parsing data. with group usage all data parsed and waiting for usage together
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) { // fetching data here because of ViewController life cycle
         super.viewWillAppear(animated)
         updateWeather()
     }
@@ -40,7 +40,7 @@ final class HomeViewController: UIViewController {
             APICaller.shared.getWeather(cityName: city) { result in
                 switch result {
                 case .success(let data):
-                    self.citiesWeather[city] = data
+                    self.citiesWeather[city] = data // city is the key
                 case .failure(let error):
                     print(error)
                 }
@@ -56,7 +56,7 @@ final class HomeViewController: UIViewController {
             }
 
         }
-        group.notify(queue: .main) {
+        group.notify(queue: .main) { // parsed data all together ready to use
             self.tableView.reloadData()
         }
     }
@@ -65,7 +65,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return citiesWeather.count / 2
+        return citiesWeather.count / 2 // making 2 columns
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -79,8 +79,10 @@ extension HomeViewController: UITableViewDelegate {
         let secondCityTemp = citiesTemp[secondCity]?.temp
         let firstCityWind = citiesWind[firstCity]?.speed
         let secondCityWind = citiesWind[secondCity]?.speed
+        let firstCityConditionId = citiesWeather[firstCity]?[0].id
+        let secondCityConditionId = citiesWeather[secondCity]?[0].id
 
-        cell.configure(.init(firstCityName: firstCity, secondCityName: secondCity, firstCityWeather: firstCityWeather ?? "", secondCityWeather: secondCityWeather ?? "", firstCityTemp: firstCityTemp!, secondCityTemp: secondCityTemp!, firstCityWind: firstCityWind!, secondCityWind: secondCityWind!))
+        cell.configure(.init(firstCityName: firstCity, secondCityName: secondCity, firstCityWeather: firstCityWeather ?? "", secondCityWeather: secondCityWeather ?? "", firstCityTemp: firstCityTemp!, secondCityTemp: secondCityTemp!, firstCityWind: firstCityWind!, secondCityWind: secondCityWind!, firstCityConditionId: firstCityConditionId!, secondCityConditionId: secondCityConditionId!)) // pass data to cell
         return cell
     }
     
@@ -97,7 +99,7 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: CollectionViewTableViewCellDelegate {
     
-    func firstCityButtonTapped(completion: @escaping () -> String) {
+    func firstCityButtonTapped(completion: @escaping () -> String) { // passing data when button clicked 
         let name = completion()
         if let value = citiesWeather[name] {
             if let tempValue = citiesTemp[name] {
