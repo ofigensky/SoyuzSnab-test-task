@@ -45,7 +45,49 @@ class CollectionViewTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private let secondCityImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "sun.max")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private let firstCityWeatherLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let secondCityWeatherLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let firstCityTemp: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let secondCityTemp: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let firstCityWind: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let secondCityWind: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -82,26 +124,44 @@ class CollectionViewTableViewCell: UITableViewCell {
         contentView.addSubview(secondCityButton)
         contentView.addSubview(firstCityWeatherLabel)
         contentView.addSubview(firstCityImage)
-        
+        contentView.addSubview(secondCityImage)
+        contentView.addSubview(secondCityWeatherLabel)
+        contentView.addSubview(firstCityTemp)
+        contentView.addSubview(secondCityTemp)
+        contentView.addSubview(firstCityWind)
+        contentView.addSubview(secondCityWind)
+
         NSLayoutConstraint.activate([
             firstCityLabel.topAnchor.constraint(equalTo: topAnchor),
             firstCityLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             secondCityLabel.topAnchor.constraint(equalTo: topAnchor),
             secondCityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
-            firstCityButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5),
-            firstCityButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            firstCityButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            secondCityButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5),
-            secondCityButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            secondCityButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
             firstCityImage.topAnchor.constraint(equalTo: firstCityLabel.bottomAnchor, constant: 10),
             firstCityImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            secondCityImage.topAnchor.constraint(equalTo: secondCityLabel.bottomAnchor, constant: 10),
+            secondCityImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             
             firstCityWeatherLabel.topAnchor.constraint(equalTo: firstCityImage.bottomAnchor, constant: 10),
-            firstCityWeatherLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+            firstCityWeatherLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            secondCityWeatherLabel.topAnchor.constraint(equalTo: secondCityImage.bottomAnchor, constant: 10),
+            secondCityWeatherLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
+            firstCityTemp.topAnchor.constraint(equalTo: firstCityWeatherLabel.bottomAnchor, constant: 10),
+            firstCityTemp.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            secondCityTemp.topAnchor.constraint(equalTo: secondCityWeatherLabel.bottomAnchor, constant: 10),
+            secondCityTemp.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
+            firstCityWind.topAnchor.constraint(equalTo: firstCityTemp.bottomAnchor, constant: 10),
+            firstCityWind.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            secondCityWind.topAnchor.constraint(equalTo: secondCityTemp.bottomAnchor, constant: 10),
+            secondCityWind.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
+            firstCityButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5),
+            firstCityButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            secondCityButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5),
+            secondCityButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+    
         ])
     }
 }
@@ -110,14 +170,24 @@ extension CollectionViewTableViewCell {
     struct ViewState {
         let firstCityName: String
         let secondCityName: String
-        let test: String
+        let firstCityWeather: String
+        let secondCityWeather: String
+        let firstCityTemp: Double
+        let secondCityTemp: Double
+        let firstCityWind: Double
+        let secondCityWind: Double
 
     }
     
     func configure(_ viewState: ViewState) {
         firstCityLabel.text = viewState.firstCityName
         secondCityLabel.text = viewState.secondCityName
-        firstCityWeatherLabel.text = viewState.test
+        firstCityWeatherLabel.text = viewState.firstCityWeather
+        secondCityWeatherLabel.text = viewState.secondCityWeather
+        firstCityTemp.text = viewState.firstCityTemp.toString() + " °C"
+        secondCityTemp.text = viewState.secondCityTemp.toString() + " °C"
+        firstCityWind.text = viewState.firstCityWind.toString() + " m/s"
+        secondCityWind.text = viewState.secondCityWind.toString() + " m/s"
     }
 }
 

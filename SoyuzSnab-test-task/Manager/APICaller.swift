@@ -9,7 +9,8 @@ struct Constants {
 class APICaller {
 
     static let shared = APICaller()
-    func getData(cityName: String, completion: @escaping(Result<[WeatherDataModel], Error>) -> Void) {
+    
+    func getWeather(cityName: String, completion: @escaping(Result<[WeatherDataModel], Error>) -> Void) {
         guard let url = URL(string: (Constants.baseURL + cityName)) else { return }
 
         URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -17,10 +18,9 @@ class APICaller {
             do {
                 let results = try JSONDecoder().decode(MainWeatherDataModel.self, from: data)
                 if let weather = results.weather {
-                    completion(.success(weather))
-                    print(weather.description)
-                } else {
-                    completion(.success([]))
+                    DispatchQueue.main.async {
+                        completion(.success(weather))
+                    }
                 }
             } catch {
                 completion(.failure(error))
@@ -28,5 +28,34 @@ class APICaller {
         }
         .resume()
     }
+    
+    func getWind(cityName: String, completion: @escaping(Wind) -> Void) {
+        guard let url = URL(string: (Constants.baseURL + cityName)) else { return }
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else { return }
+            do {
+                let results = try JSONDecoder().decode(MainWeatherDataModel.self, from: data)
+                let wind = results.wind
+                completion(wind)
+            } catch {
+                print(error)
+            }
+        }
+        .resume()
+    }
+    
+    func getTemp(cityName: String, completion: @escaping(Main) -> Void) {
+        guard let url = URL(string: (Constants.baseURL + cityName)) else { return }
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else { return }
+            do {
+                let results = try JSONDecoder().decode(MainWeatherDataModel.self, from: data)
+                let temp = results.main
+                completion(temp)
+            } catch {
+                print(error)
+            }
+        }
+        .resume()
+    }
 }
-

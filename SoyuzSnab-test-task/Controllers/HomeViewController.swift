@@ -3,15 +3,10 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     
-    private var citiesWeather: [String : [WeatherDataModel]] = [String : [WeatherDataModel]]()  {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    var cities = ["Moscow", "Vladivostok", "Novosibirsk", "Yekaterinburg", "Kazan", "Irkutsk", "Chelyabinsk", "Krasnoyarsk", "Samara", "Ufa", "Rostov-on-Don", "Omsk", "Krasnodar", "Voronezh", "Perm", "Volgograd", "Saratov", "Tyumen", "Tolyatti", "Barnaul"]
+    private var citiesWeather: [String : [WeatherDataModel]] = [String : [WeatherDataModel]]()
+    private var citiesTemp: [String : Main] = [String : Main]()
+    private var citiesWind: [String : Wind] = [String : Wind]()
+    private var cities = ["Moscow", "Vladivostok", "Novosibirsk", "Yekaterinburg", "Kazan", "Irkutsk", "Chelyabinsk", "Krasnoyarsk", "Samara", "Ufa", "Rostov-on-Don", "Omsk", "Krasnodar", "Voronezh", "Perm", "Volgograd", "Saratov", "Tyumen", "Tolyatti", "Barnaul"]
 
 
     private var tableView: UITableView = {
@@ -19,33 +14,51 @@ final class HomeViewController: UIViewController {
         tableView.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
         return tableView
     }()
+    
+    let group = DispatchGroup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-
-        for city in cities { // refactor to func
-            APICaller.shared.getData(cityName: city) { result in
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateWeather()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
+    func updateWeather() {
+        for city in cities {
+            group.enter()
+            APICaller.shared.getWeather(cityName: city) { result in
                 switch result {
                 case .success(let data):
                     self.citiesWeather[city] = data
                 case .failure(let error):
                     print(error)
                 }
+                self.group.leave()
+
             }
+            APICaller.shared.getTemp(cityName: city) { result in
+                self.citiesTemp[city] = result
+            }
+            
+            APICaller.shared.getWind(cityName: city) { result in
+                self.citiesWind[city] = result
+            }
+
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+        group.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -57,14 +70,17 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as! CollectionViewTableViewCell
-        
+        cell.delegate = self
         let firstCity = cities[indexPath.row]
         let secondCity = cities[indexPath.row + 10]
-        let firstCityWeather = citiesWeather[firstCity]
-        let test = firstCityWeather?[0].description
+        let firstCityWeather = self.citiesWeather[firstCity]?[0].description
+        let secondCityWeather = self.citiesWeather[secondCity]?[0].description
+        let firstCityTemp = citiesTemp[firstCity]?.temp
+        let secondCityTemp = citiesTemp[secondCity]?.temp
+        let firstCityWind = citiesWind[firstCity]?.speed
+        let secondCityWind = citiesWind[secondCity]?.speed
 
-        cell.delegate = self
-        cell.configure(.init(firstCityName: firstCity, secondCityName: secondCity, test: test ?? ""))
+        cell.configure(.init(firstCityName: firstCity, secondCityName: secondCity, firstCityWeather: firstCityWeather ?? "", secondCityWeather: secondCityWeather ?? "", firstCityTemp: firstCityTemp!, secondCityTemp: secondCityTemp!, firstCityWind: firstCityWind!, secondCityWind: secondCityWind!))
         return cell
     }
     
