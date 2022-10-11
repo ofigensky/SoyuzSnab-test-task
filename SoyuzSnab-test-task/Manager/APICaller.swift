@@ -2,11 +2,11 @@
 import Foundation
 
 
-struct Constants {
+private struct Constants {
     static let API_KEY = "b29f575d40bb6530ee374c0132ed18f0"
     static let baseURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(API_KEY)&units=metric&q=" // + cityName
 }
-class APICaller {
+final class APICaller {
 
     static let shared = APICaller()
     

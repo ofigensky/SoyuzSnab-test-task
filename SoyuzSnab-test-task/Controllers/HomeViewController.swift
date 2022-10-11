@@ -15,7 +15,7 @@ final class HomeViewController: UIViewController {
         return tableView
     }()
     
-    let group = DispatchGroup()
+    private let group = DispatchGroup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,14 +100,22 @@ extension HomeViewController: CollectionViewTableViewCellDelegate {
     func firstCityButtonTapped(completion: @escaping () -> String) {
         let name = completion()
         if let value = citiesWeather[name] {
-            FavouriteService.shared.addToFavourite(name: name, weatherParam: value)
+            if let tempValue = citiesTemp[name] {
+                if let windValue = citiesWind[name] {
+                    FavouriteService.shared.addToFavourite(name: name, weatherParam: value, weatherTemp: tempValue, weatherWind: windValue)
+                }
+            }
         }
     }
     
     func secondCityButtonTapped(completion: @escaping () -> String) {
         let name = completion()
         if let value = citiesWeather[name] {
-            FavouriteService.shared.addToFavourite(name: name, weatherParam: value)
+            if let tempValue = citiesTemp[name] {
+                if let windValue = citiesWind[name] {
+                    FavouriteService.shared.addToFavourite(name: name, weatherParam: value, weatherTemp: tempValue, weatherWind: windValue)
+                }
+            }
         }
     }
 }

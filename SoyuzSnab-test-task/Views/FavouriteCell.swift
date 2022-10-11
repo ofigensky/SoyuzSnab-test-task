@@ -2,7 +2,7 @@
 import Foundation
 import UIKit
 
-class FavouriteCell: UITableViewCell {
+final class FavouriteCell: UITableViewCell {
     
     static let identifier = "CollectionViewCell"
     

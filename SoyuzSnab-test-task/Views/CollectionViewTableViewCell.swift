@@ -2,7 +2,7 @@
 import Foundation
 import UIKit
 
-class CollectionViewTableViewCell: UITableViewCell {
+final class CollectionViewTableViewCell: UITableViewCell {
     
     static let identifier = "CollectionViewTableViewCell"
     
