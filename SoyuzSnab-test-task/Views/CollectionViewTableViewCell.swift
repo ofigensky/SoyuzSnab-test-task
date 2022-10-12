@@ -26,6 +26,7 @@ final class CollectionViewTableViewCell: UITableViewCell {
     private let firstCityButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray6
+        button.showsTouchWhenHighlighted = true
         button.layer.cornerRadius = 7
         button.setTitle("Save city", for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
@@ -36,6 +37,7 @@ final class CollectionViewTableViewCell: UITableViewCell {
     private let secondCityButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray6
+        button.showsTouchWhenHighlighted = true
         button.layer.cornerRadius = 7
         button.setTitle("Save city", for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)

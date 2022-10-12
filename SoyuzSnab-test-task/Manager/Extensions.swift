@@ -1,5 +1,6 @@
 
 import Foundation
+import UIKit
 
 extension Double { //  converting Double to String 
     func toString() -> String {
@@ -7,3 +8,4 @@ extension Double { //  converting Double to String
         return String(format: "%.1f", value)
     }
 }
+
